@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Student Form </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #trhead{
+            background-color: black;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            margin: 50px;
+        }
+
+        .container {
+            background-color: lightgrey;
+        }
+
+        form {
+            padding: 50px;
+        }
+        #grid{
+         margin-bottom: 20px;
+        }
+        button{
+            margin-top: 10px;
+        }
+        #tabled{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <h1>Student Form </h1>
+    <div class="container">
+
+        <form action="/student" method="POST">
+            
+                <div class="row" id="grid">
+                    <div class="col">
+                        <label for="exampleInputEmail1">First Name</label>
+                        <input type="text" class="form-control" name="First_Name" placeholder="First name">
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputEmail1">Last Name</label>
+                        <input type="text" class="form-control" name="Last_Name" placeholder="Last name">
+                    </div>
+                </div>
+
+            <div class="form-group">
+
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="Email" aria-describedby="emailHelp"
+                    placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Mobile Number</label>
+                <input type="number" class="form-control" id="exampleInputPassword1" name="Mobile_Number" placeholder="Mobile Number">
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+<!-- table  -->
+<div class="container my-4" id="tabled">
+    <h3>Student Information</h3>
+    {% if data|length == 0 %}
+    <div class="alert alert-dark" role="alert">
+        There is no information about students.
+    </div>
+    {% else %}
+    <table border="2px solid black" class="table table-striped">
+        <thead>
+            <tr class="table table-dark table-active" id="trhead">
+                <th scope="col">SNO</th>
+                <th scope="col">First_Name</th>
+                <th scope="col">Last_Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile_Number</th>
+                <!-- <th scope="col">Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{ row['First_Name'] }}</td>
+                <td>{{ row['Last_Name'] }}</td>
+                <td>{{ row['Email'] }}</td>
+                <td>{{ row['Mobile_Number'] }}</td>
+            
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+</body>
+</html>
